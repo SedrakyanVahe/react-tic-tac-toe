@@ -78,7 +78,9 @@ function Board() {
 
   return (
     <div style={{ paddingTop: '30px' }}>
-      <div style={{ margin: '15px 0' }}>{gameEnd ? <h2>{winner} won the game</h2> : <h2>Turn of {boardValue ? 'X' : 'O'}</h2>}</div>
+      <div style={{ margin: '15px 0' }}>
+        {gameEnd ? <h2>{winner} {winner  === 'Draw' ? <></> : <span>won the game</span> }</h2> : <h2>{boardValue ? 'X' : 'O'}'s turn</h2>}
+      </div>
 
       <div className='row'>
         <Box value={board[0]} onBoxClick={() => onBoxClickHandler(0)} />
