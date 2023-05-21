@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/react-tic-tac-toe/static/css/main.b29fc977.css",
+    "main.js": "/react-tic-tac-toe/static/js/main.5aebfb78.js",
+    "static/media/win-sound.mp3": "/react-tic-tac-toe/static/media/win-sound.3500ed0940d1a3c79bc9.mp3",
+    "static/media/reset-sound.mp3": "/react-tic-tac-toe/static/media/reset-sound.143bca175d1256ddfa18.mp3",
+    "static/media/click-sound.mp3": "/react-tic-tac-toe/static/media/click-sound.b070217cc3ec9826fd89.mp3",
+    "index.html": "/react-tic-tac-toe/index.html",
+    "main.b29fc977.css.map": "/react-tic-tac-toe/static/css/main.b29fc977.css.map",
+    "main.5aebfb78.js.map": "/react-tic-tac-toe/static/js/main.5aebfb78.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b29fc977.css",
+    "static/js/main.5aebfb78.js"
+  ]
+}
