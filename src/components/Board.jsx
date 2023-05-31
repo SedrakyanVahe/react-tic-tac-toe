@@ -1,30 +1,30 @@
 import { useState, useEffect } from 'react'
 import Box from './Box'
-import { playSound, getOccurrence } from '../utils/playSound'
+import { playSound, isContainEmptyString } from '../utils/helpers'
 import clickSound from '../assets/audio/click-sound.mp3'
 import resetSound from '../assets/audio/reset-sound.mp3'
 import winSound from '../assets/audio/win-sound.mp3'
 
-const initalValue = ['', '', '', '', '', '', '', '', '']
+const initialValue = ['', '', '', '', '', '', '', '', '']
+
+const lines = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+]
 
 function Board() {
-  const [board, setBoard] = useState(initalValue)
+  const [board, setBoard] = useState(initialValue)
   const [boardValue, setBoardValue] = useState(true)
   const [gameEnd, setGameEnd] = useState(false)
   const [winner, setWinner] = useState('')
 
   useEffect(() => {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ]
-
     for (let i = 0; i < lines.length; i++) {
       if (board[lines[i][0]] && board[lines[i][0]] === board[lines[i][1]] && board[lines[i][0]] === board[lines[i][2]]) {
         setWinner(board[lines[i][0]])
@@ -33,26 +33,11 @@ function Board() {
       }
     }
 
-    draw()
-  }, [board])
-
-  const draw = () => {
-    let xCount = 0
-    let oCount = 0
-
-    board.forEach((value) => {
-      if (value === 'X') xCount++
-      else if (value === 'O') oCount++
-    })
-
-    if (xCount === 5 && oCount === 4) {
+    if (!board.some(isContainEmptyString)) {
       setGameEnd(true)
-
-      if (winner === 'X' || winner === 'O') {
-        setWinner('Draw')
-      }
+      playSound(winSound)
     }
-  }
+  }, [board])
 
   const onBoxClickHandler = (index) => {
     if (gameEnd) return
@@ -70,7 +55,7 @@ function Board() {
   }
 
   const onResetBtnClickHandler = () => {
-    setBoard(initalValue)
+    setBoard(initialValue)
     setGameEnd(false)
     setBoardValue(true)
     playSound(resetSound)
@@ -79,7 +64,7 @@ function Board() {
   return (
     <div style={{ paddingTop: '30px' }}>
       <div style={{ margin: '15px 0' }}>
-        {gameEnd ? <h2>{winner} {winner  === 'Draw' ? <></> : <span>won the game</span> }</h2> : <h2>{boardValue ? 'X' : 'O'}'s turn</h2>}
+        {gameEnd ? <h2>{winner} {winner  === '' ? <>Draw</> : <span>won the game</span> }</h2> : <h2>{boardValue ? 'X' : 'O'}'s turn</h2>}
       </div>
 
       <div className='row'>
